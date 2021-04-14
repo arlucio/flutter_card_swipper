@@ -12,6 +12,8 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
   @override
   void initState() {
     if (widget.itemWidth == null) {
+      if(widget.index != null)
+        _currentIndex = widget.index;
       throw Exception(
           '==============\n\nwidget.itemWith must not be null when use stack layout.\n========\n');
     }
@@ -39,6 +41,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
 
   @mustCallSuper
   void afterRender() {
+    if(context == null) return;
     final renderObject = context.findRenderObject()!;
     final Size size = renderObject.paintBounds.size;
     _swiperWidth = size.width;
